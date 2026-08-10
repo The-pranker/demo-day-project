@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>placeholder</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com"/>
     <script src="script.js" defer></script>
     <script type="module" src="app.js" defer></script>
-    <script src="https://unpkg.com"></script>
 </head>
 <body>
     <nav>
@@ -16,25 +14,11 @@
         <div id="login_nav"><a href="login.html">Login</a></div>
         <div id="register_nav"><a href="register.html">Register</a></div>
     </nav>
-    <div id="map_cont"></div>
 
-   
-   <!-- transfer to script.js later-->
-    <script>
-        let map = document.getElementById("map_container");
-
-        let mapImplement = L.map("map_cont").setView([39.9526, -75.1652], 13)
-
-        //display usign the openstreetmap tile layer thing
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}//{y}.png',{
-            maxZoom:19,
-            
-        }
-            
-
-        )
-
-    </script>
-    
+    <div id="register_div">
+        <input style="padding: 12px 20px;" type="email" id="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        <input style="padding: 12px 20px;" type="password" id="password" placeholder="Password" required>  
+        <button style="padding: 12px 20px;" type="submit" id="register_button">Register</button>
+    </div>
 </body>
 </html>
