@@ -6,8 +6,8 @@
 
 html {
     background-color: blanchedalmond;
-    scroll-behavior: smooth; 
-    font-family: 'Poppins', sans-serif; 
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
     font-size: 16px;
 }
 
@@ -29,10 +29,10 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    display: flex; 
-    justify-content: space-between; 
-    padding-top: 15px; 
-    padding-bottom: 15px; 
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    padding-bottom: 15px;
     border-radius: 15px;
 }
 
@@ -100,63 +100,276 @@ nav {
     font-weight: bold;
 }
 
-.btn-primary { 
-    background-color: #007bff; 
-    color: white; 
+.btn-primary {
+    background-color: #007bff;
+    color: white;
 }
 
-.btn-secondary { 
-    background-color: #6c757d; 
-    color: white; 
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
 }
 
 #order_request {
     background-color: lightgoldenrodyellow;
     display: flex;
-    width: fit-content;
+    max-width: 500px;
+    width: 90%;
     flex-wrap: wrap;
-    margin-inline: auto;
-    justify-content: space-between;
+    margin: 30px auto;
+    justify-content: center;
     align-items: center;
-    flex-direction: row;
-    gap: 10px;
-    padding: 10px 10px 10px 10px;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    position: relative; 
+}
+
+#order_request > p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
 }
 
 #order_request > img {
-    width: 15px;
+    width: 22px;
     height: auto;
+    cursor: pointer;
 }
 
-#order_request {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+#list_form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative; 
 }
 
 .break {
-  flex-basis: 100%;
-  height: 0;
+    flex-basis: 100%;
+    height: 0;
 }
 
 .list-element {
-  display: none;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+    display: none;
+    opacity: 0;
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.2s ease;
+}
+
+input.list-element:focus {
+    border-color: #0bad5c;
+}
+
+button.list-element {
+    background-image: linear-gradient(to right, rgb(11, 173, 92), rgb(26, 95, 33));
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
 }
 
 .list-element.show-layout {
-  display: inline-block;
+    display: block;
 }
 
 .list-element.active {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#location_wrapper {
+    position: relative !important;
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 100;
+}
+
+#location_wrapper.show-layout {
+    display: block;
+}
+
+#location_wrapper.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 #plus_button {
-  transition: transform 0.4s ease;
+    transition: transform 0.4s ease;
+}
+
+#listings {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.listing-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px 70px 20px 20px; 
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.listing-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.listing-title {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    color: #333333;
+}
+
+.listing-description {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666666;
+    line-height: 1.4;
+}
+
+.listing-delete-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    z-index: 5;
+}
+
+.listing-delete-btn:hover {
+    opacity: 1;
+}
+
+.suggestions-dropdown {
+    position: absolute !important;
+    top: 100%; 
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 99999 !important; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    display: none;
+}
+
+.suggestions-dropdown.has-data {
+    display: block !important;
+}
+
+.suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background-color: #f5f5f5;
+}
+
+.listing-route-btn {
+    position: absolute;
+    top: 50px;
+    right: 14px;
+    background-color: #0bad5c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.1s ease;
+    z-index: 5;
+}
+
+.listing-route-btn:hover {
+    background-color: #1a5f21;
+    transform: scale(1.05);
+}
+
+.listing-route-btn:active {
+    transform: scale(0.95);
+}
+
+.leaflet-routing-container {
+    background-color: white;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-height: 280px;
+    overflow-y: auto;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #333;
+    border: 1px solid #e0e0e0;
+}
+
+.leaflet-routing-alt ol {
+    padding-left: 20px;
+}
+
+.leaflet-routing-alt li {
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed #f0f0f0;
+}
+
+#displayDirections {
+    background-color: white;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+#displayDirections ol {
+    padding-left: 25px;
+    margin-top: 10px;
+}
+
+#displayDirections li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#displayDirections li:last-child {
+    border-bottom: none;
 }

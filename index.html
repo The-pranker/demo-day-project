@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>placeholder</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <script type="module" src="app.js" defer></script>
 
-    <!-- leaflet openstreetmap api-->
+    <link rel="stylesheet" href="style.css">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com"/>
+    <script src="https://unpkg.com"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <script src="script.js" defer></script>
 
 </head>
 <body>
@@ -37,20 +46,31 @@
         </div>    
     </div>
 
-     <div id="order_request"> 
+    <div id="order_request"> 
         <p>Add Listing</p> 
         <img id="plus_button" src="images/plus_button.png"> 
         
         <div class="break"></div>
-        <form id="list_form">
-            <input class="list-element" id="list_name" type="text" placeholder="Item Name" required> 
-            <input class="list-element" id="list_description" type="text" placeholder="Optional Description"> 
-            <button class="list-element" id="list_submit" type="submit">List Item</button> 
-        </form>
+            <form id="list_form">
+                <input class="list-element" id="list_name" type="text" placeholder="Item Name" required>
+                <input class="list-element" id="list_description" type="text" placeholder="Optional Description">
+                
+
+                <div id="location_wrapper" class="list-element">
+                    <input id="list_location" type="text" placeholder="Optional Location" autocomplete="off" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                    <div id="address_suggestions" class="suggestions-dropdown"></div>
+                </div>
+
+                <button class="list-element" id="list_submit" type="submit">List Item</button>
+            </form>
+
+
     </div>
+    
+    <div id="displayDirections"></div>
 
     <section id="listings">
-        
+
     </section>
 
 
