@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>placeholder</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com"/>
     <script src="script.js" defer></script>
     <script type="module" src="app.js" defer></script>
-    <script src="https://unpkg.com"></script>
+
+    <!-- leaflet openstreetmap api-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 </head>
 <body>
     <nav>
@@ -16,25 +19,40 @@
         <div id="login_nav"><a href="login.html">Login</a></div>
         <div id="register_nav"><a href="register.html">Register</a></div>
     </nav>
-    <div id="map_cont"></div>
-
-   
-   <!-- transfer to script.js later-->
-    <script>
-        let map = document.getElementById("map_container");
-
-        let mapImplement = L.map("map_cont").setView([39.9526, -75.1652], 13)
-
-        //display usign the openstreetmap tile layer thing
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}//{y}.png',{
-            maxZoom:19,
-            
-        }
-            
-
-        )
-
-    </script>
     
+    <div id="locationModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>Find Nearby Features</h3>
+            <p>This website uses your location to center the map automatically. Would you like to share your location?</p>
+            <div class="modal-buttons">
+                <button id="denyLocationBtn" class="btn btn-secondary">No, Use Default</button>
+                <button id="allowLocationBtn" class="btn btn-primary">Yes, Allow</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="map_wrapper">
+        <div id="map_cont">
+
+        </div>    
+    </div>
+
+     <div id="order_request"> 
+        <p>Add Listing</p> 
+        <img id="plus_button" src="images/plus_button.png"> 
+        
+        <div class="break"></div>
+        <form id="list_form">
+            <input class="list-element" id="list_name" type="text" placeholder="Item Name" required> 
+            <input class="list-element" id="list_description" type="text" placeholder="Optional Description"> 
+            <button class="list-element" id="list_submit" type="submit">List Item</button> 
+        </form>
+    </div>
+
+    <section id="listings">
+        
+    </section>
+
+
 </body>
 </html>
