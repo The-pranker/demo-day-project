@@ -5,7 +5,7 @@ const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const currentPath = window.location.pathname;
 
 
-if (currentPath.includes("register.html")) {
+if (currentPath.endsWith("/register.html") || currentPath.includes("register.html")) {
     const registerEmailInput = document.getElementById("email_register");
     const registerPasswordInput = document.getElementById("password_register");
     const registerButton = document.getElementById("register_button");
@@ -28,7 +28,7 @@ if (currentPath.includes("register.html")) {
 }
 
 
-if (currentPath.includes("login.html")) {
+if (currentPath.endsWith("/login.html") || currentPath.includes("login.html")) {
     const loginEmailInput = document.getElementById("email_login");
     const loginPasswordInput = document.getElementById("password_login");
     const loginButton = document.getElementById("login_button");
@@ -51,7 +51,7 @@ if (currentPath.includes("login.html")) {
 }
 
 
-if (currentPath === "/" || currentPath.includes("index.html")) {
+if (currentPath.endsWith("/") || currentPath.includes("index.html")) {
     var map = L.map('map_cont');
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
