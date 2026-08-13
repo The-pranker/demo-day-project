@@ -89,6 +89,7 @@ if (currentPath === "/" || currentPath.includes("index.html") || currentPath.inc
     const registerNav = document.getElementById('register_nav');
     const logoutNav = document.getElementById('logout_nav');
     const logoutBtn = document.getElementById('logout_btn');
+    const locationNav = document.getElementById('location_nav');
 
     (async () => {
     const { data: { session }, error } = await db.auth.getSession();
@@ -119,7 +120,17 @@ if (currentPath === "/" || currentPath.includes("index.html") || currentPath.inc
         };
     }
     
-    
+    if (localStorage.getItem('locationPermissionChoice') === 'denied') {
+        locationNav.style.display = 'block';
+    } else {
+        locationNav.style.display = 'none';
+    }
+
+    locationNav.onclick = function() {
+        localStorage.setItem('locationPermissionChoice', 'allowed');
+        locationNav.style.display = 'none';
+        requestBrowserGeolocation();
+    };
     
     var map = L.map('map_cont');
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
