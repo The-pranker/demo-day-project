@@ -13,6 +13,31 @@ async function isUserLoggedIn() {
     return true;
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const locationNav = document.getElementById('location_nav'); 
+    
+    if (!locationNav) return; 
+
+    const permissionChoice = localStorage.getItem('locationPermissionChoice');
+
+    if (permissionChoice === 'denied') {
+        locationNav.style.display = 'block';
+    } else {
+        locationNav.style.display = 'none';
+    }
+
+
+    locationNav.addEventListener('click', () => {
+        localStorage.setItem('locationPermissionChoice', 'allowed');
+        locationNav.style.display = 'none';
+        
+        if (typeof requestBrowserGeolocation === 'function') {
+            requestBrowserGeolocation();
+        }
+    });
+});
+
+
 
 if (currentPath.includes("register.html") || currentPath.endsWith("register")) {
     (async () => {
@@ -89,7 +114,6 @@ if (currentPath === "/" || currentPath.includes("index.html") || currentPath.inc
     const registerNav = document.getElementById('register_nav');
     const logoutNav = document.getElementById('logout_nav');
     const logoutBtn = document.getElementById('logout_btn');
-    const locationNav = document.getElementById('location_nav');
 
     (async () => {
     const { data: { session }, error } = await db.auth.getSession();
@@ -119,18 +143,6 @@ if (currentPath === "/" || currentPath.includes("index.html") || currentPath.inc
             window.location.href = "index.html";
         };
     }
-    
-    if (localStorage.getItem('locationPermissionChoice') === 'denied') {
-        locationNav.style.display = 'block';
-    } else {
-        locationNav.style.display = 'none';
-    }
-
-    locationNav.onclick = function() {
-        localStorage.setItem('locationPermissionChoice', 'allowed');
-        locationNav.style.display = 'none';
-        requestBrowserGeolocation();
-    };
     
     var map = L.map('map_cont');
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
