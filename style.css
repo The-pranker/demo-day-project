@@ -5,7 +5,7 @@
 }
 
 html {
-    background-color: blanchedalmond;
+    background-color: #F8F9FA;
     scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
@@ -19,13 +19,13 @@ body {
 nav > div > a {
     text-decoration: none;
     color: black;
-    background-color: lightgoldenrodyellow;
+    background-color: #D1E7DD;
     margin-left: 25px;
     margin-right: 25px;
 }
 
 nav {
-    background-color: lightgoldenrodyellow;
+    background-color: #D1E7DD;
     top: 0;
     left: 0;
     width: 100%;
@@ -111,7 +111,7 @@ nav {
 }
 
 #order_request {
-    background-color: lightgoldenrodyellow;
+    background-color: #D1E7DD;
     display: flex;
     max-width: 500px;
     width: 90%;

@@ -5,7 +5,21 @@ const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const currentPath = window.location.pathname;
 
 
+async function isUserLoggedIn() {
+    const { data: { session }, error } = await db.auth.getSession();
+    if (error || !session) {
+        return false;
+    }
+    return true;
+}
+
+
 if (currentPath.includes("register.html") || currentPath.endsWith("register")) {
+    (async () => {
+        if (await isUserLoggedIn()) {
+            window.location.href = "index.html";
+            return;
+        }
     const registerEmailInput = document.getElementById("email_register");
     const registerPasswordInput = document.getElementById("password_register");
     const registerButton = document.getElementById("register_button");
@@ -25,33 +39,88 @@ if (currentPath.includes("register.html") || currentPath.endsWith("register")) {
         }
         window.location.href = "index.html";
     };
+    })();
 }
 
 
-if (currentPath.includes("login.html") || currentPath.endsWith("login")) {
+if (currentPath.includes("login")) {
     const loginEmailInput = document.getElementById("email_login");
     const loginPasswordInput = document.getElementById("password_login");
     const loginButton = document.getElementById("login_button");
 
-    loginButton.onclick = async function (event) {
-        event.preventDefault();
-        const email = loginEmailInput.value;
-        const password = loginPasswordInput.value;
-        if (!email || !password) {
-            alert("Please enter both an email and a password.");
-            return;
+    if (loginButton) {
+        loginButton.onclick = async function (event) {
+            event.preventDefault();
+            
+            if (!loginEmailInput || !loginPasswordInput) {
+                console.error("Login input fields were not found in the HTML.");
+                return;
+            }
+
+            const email = loginEmailInput.value;
+            const password = loginPasswordInput.value;
+
+            if (!email || !password) {
+                alert("Please enter both an email and a password.");
+                return;
+            }
+
+            const { data, error } = await db.auth.signInWithPassword({ email: email, password: password });
+            if (error) {
+                alert("Login Error: " + error.message);
+                return;
+            }
+            window.location.href = "index.html";
+        };
+    }
+
+    (async () => {
+        if (await isUserLoggedIn()) {
+            window.location.href = "index.html";
         }
-        const { data, error } = await db.auth.signInWithPassword({ email: email, password: password });
-        if (error) {
-            alert("Login Error: " + error.message);
-            return;
-        }
-        window.location.href = "index.html";
-    };
+    })();
 }
 
 
+
+
 if (currentPath === "/" || currentPath.includes("index.html") || currentPath.includes("demo-day-project")) {
+    const loginNav = document.getElementById('login_nav');
+    const registerNav = document.getElementById('register_nav');
+    const logoutNav = document.getElementById('logout_nav');
+    const logoutBtn = document.getElementById('logout_btn');
+
+    (async () => {
+    const { data: { session }, error } = await db.auth.getSession();
+
+    if (session && !error) {
+        if (loginNav) loginNav.style.display = 'none';
+        if (registerNav) registerNav.style.display = 'none';
+        if (logoutNav) logoutNav.style.display = 'block';
+    } else {
+        if (loginNav) loginNav.style.display = 'block';
+        if (registerNav) registerNav.style.display = 'block';
+        if (logoutNav) logoutNav.style.display = 'none';
+    }
+})();
+
+
+    if (logoutBtn) {
+        logoutBtn.onclick = async function(event) {
+            event.preventDefault(); 
+            
+            const { error } = await db.auth.signOut();
+            if (error) {
+                alert("Error logging out: " + error.message);
+                return;
+            } 
+            
+            window.location.href = "index.html";
+        };
+    }
+    
+    
+    
     var map = L.map('map_cont');
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
